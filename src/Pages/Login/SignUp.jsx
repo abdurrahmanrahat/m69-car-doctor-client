@@ -1,11 +1,30 @@
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const SignUp = () => {
 
+    const { createUser } = useContext(AuthContext);
+
     const handleSignUp = event => {
         event.preventDefault()
+        const form = event.target;
 
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+
+        // create user
+        createUser(email, password)
+            .then(result => {
+                const createdUser = result.user;
+                console.log(createdUser);
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
     }
 
     return (
@@ -37,7 +56,7 @@ const SignUp = () => {
                                     <span className="label-text">Confirm Password</span>
                                 </label>
                                 <input type="password" name='password' placeholder="Your password" className="input input-bordered" required />
-                                
+
                             </div>
                             <div className="form-control mt-6">
                                 <input className="btn btn-primary" type="submit" value="Sign Up" />
