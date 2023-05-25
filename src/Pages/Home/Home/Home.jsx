@@ -13,7 +13,6 @@ const Home = () => {
 
             {/* Services Section */}
             <Services></Services>
-            <h2>Home Page</h2>
         </div>
     );
 };
